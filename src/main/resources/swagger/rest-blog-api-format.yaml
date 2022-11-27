@@ -1,0 +1,79 @@
+---
+swagger: "2.0"
+info:
+  description:
+    "This is a sample server blog server.  You can find out more about
+    Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For
+    this sample, you can use the api key `special-key` to test the authorization filters."
+  version: 1.0.6
+  title: Swagger blog
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: blog.swagger.io
+basePath: "/v2"
+tags:
+  - name: blog
+    description: Everything about your Blogs
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+
+paths:
+  "/blog":
+    get:
+      tags:
+        - blog
+      summary: get blog
+      description: ""
+      operationId: getBlogs
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Blog"
+    post:
+      tags:
+        - blog
+      summary: Add a Blog
+      description: ""
+      operationId: addBlog
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: blog
+          description: Blog to be added.
+          required: true
+          schema:
+            "$ref": "#/definitions/Blog"
+      responses:
+        "200":
+          description: Blog Added
+          schema:
+            type: string
+
+definitions:
+  Blog:
+    type: object
+    properties:
+      blogId:
+        type: integer
+        format: int64
+      url:
+        type: string
+        example: "http://sample.com"
+      rating:
+        type: integer
+        example: 5
